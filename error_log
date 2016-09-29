@@ -1,0 +1,71 @@
+[21-Mar-2016 18:11:25] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[21-Mar-2016 18:11:25] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[21-Mar-2016 18:11:53] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[21-Mar-2016 18:11:53] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[21-Mar-2016 18:12:08] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[21-Mar-2016 18:12:08] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[25-Mar-2016 16:51:02] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[25-Mar-2016 16:51:02] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:03:29] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:03:29] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:03:43] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:03:43] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:04:47] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:04:47] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:27] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:27] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:35] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:35] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/imagick.so' - /usr/php/56/usr/lib64/php/modules/imagick.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/pdo_mysql.so' - /usr/php/56/usr/lib64/php/modules/pdo_mysql.so: undefined symbol: mysqlnd_allocator in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: pdo_sqlite: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: pdo_pgsql: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: magickwand: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/mailparse.so' - /usr/php/56/usr/lib64/php/modules/mailparse.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/oauth.so' - /usr/php/56/usr/lib64/php/modules/oauth.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/oci8.so' - /usr/php/56/usr/lib64/php/modules/oci8.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/uploadprogress.so' - /usr/php/56/usr/lib64/php/modules/uploadprogress.so: undefined symbol: zend_ini_string_ex in Unknown on line 0
+[29-Mar-2016 20:07:44] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:44] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/imagick.so' - /usr/php/56/usr/lib64/php/modules/imagick.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/pdo_mysql.so' - /usr/php/56/usr/lib64/php/modules/pdo_mysql.so: undefined symbol: mysqlnd_allocator in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: pdo_sqlite: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: pdo_pgsql: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: magickwand: Unable to initialize module
+Module compiled with module API=20131226, debug=0, thread-safety=0
+PHP    compiled with module API=20060613, debug=0, thread-safety=0
+These options need to match
+ in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/mailparse.so' - /usr/php/56/usr/lib64/php/modules/mailparse.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/oauth.so' - /usr/php/56/usr/lib64/php/modules/oauth.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/oci8.so' - /usr/php/56/usr/lib64/php/modules/oci8.so: undefined symbol: zend_new_interned_string in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  PHP Startup: Unable to load dynamic library '/usr/php/56/usr/lib64/php/modules/uploadprogress.so' - /usr/php/56/usr/lib64/php/modules/uploadprogress.so: undefined symbol: zend_ini_string_ex in Unknown on line 0
+[29-Mar-2016 20:07:47] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:07:47] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:08] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:08] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:11] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:11] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:14] PHP Warning:  Unexpected character in input:  '\' (ASCII=92) state=1 in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[29-Mar-2016 20:08:14] PHP Parse error:  syntax error, unexpected T_STRING in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/artisan on line 31
+[08-Jun-2016 20:45:52 UTC] PHP Fatal error:  Class 'Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider' not found in /home3/derekst1/public_html/dolphin-api.ninthcoast.com/vendor/laravel/framework/src/Illuminate/Foundation/ProviderRepository.php on line 146

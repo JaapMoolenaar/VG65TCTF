@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: DolphinApi
+        psr4_prefix: DolphinApi
+        src_path: app

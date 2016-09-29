@@ -1,0 +1,12 @@
+/vendor
+/node_modules
+/nbproject
+/_keys
+/_docs
+Homestead.yaml
+Homestead.json
+.env
+.idea/*
+public/img/posts/*.jpg
+public/img/pods/*.jpg
+public/img/avatars/*.jpg
