@@ -30,7 +30,7 @@ use DolphinApi\Repositories\LikeRepository;
 use DolphinApi\Repositories\CommentRepository;
 use DolphinApi\Repositories\AbuseReportRepository;
 
-class PostsController extends ApiGuardController
+class _PostsController extends ApiGuardController
 {
   public function create( Request $request )
   {

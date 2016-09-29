@@ -9,7 +9,8 @@
         "laravel/framework": "5.1.*",
         "chrisbjr/api-guard": "^2.3",
         "doctrine/dbal": "^2.5",
-        "davibennun/laravel-push-notification": "dev-laravel5"
+        "davibennun/laravel-push-notification": "dev-laravel5",
+        "fedeisas/laravel-mail-css-inliner": "~1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

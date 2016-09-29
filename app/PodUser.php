@@ -15,4 +15,9 @@ class PodUser extends Model
   {
     return date( 'U', strtotime( $value ) );
   }
+  
+  function user()
+  {
+    return $this->belongsTo( 'DolphinApi\User', 'user_id' );
+  }
 }

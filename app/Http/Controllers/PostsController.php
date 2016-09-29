@@ -14,7 +14,12 @@ use DolphinApi\Http\Controllers\Controller;
 use DolphinApi\Jobs\CommentPushNotification;
 use DolphinApi\Jobs\LikePushNotification;
 
+use DolphinApi\Jobs\Mails\MailPostCreated;
+use DolphinApi\Jobs\Mails\MailPostLiked;
+use DolphinApi\Jobs\Mails\MailPostCommentCreated;
+
 use DolphinApi\Post;
+use DolphinApi\PodUser;
 use DolphinApi\User;
 use DolphinApi\Link;
 use DolphinApi\Like;
@@ -43,12 +48,14 @@ class PostsController extends ApiGuardController
     $postData = $request->json()->get( 'post' );
     try {
       $postType = PostType::where( "name", $postData['type'] )->first();
-
+      $userId = $this->apiKey->user_id;
+      $podId = $postData['pod_id'];
+     
       $post = Post::create([
         'title'        => isset( $postData['title'] )  ? $postData['title']  : '',
         'body'         => isset( $postData['body'] )   ? $postData['body']   : '',
-        'pod_id'       => isset( $postData['pod_id'] ) ? $postData['pod_id'] : '',
-        'user_id'      => $this->apiKey->user_id,
+        'pod_id'       => $podId,
+        'user_id'      => $userId,
         'post_type_id' => $postType->id
       ]);
 
@@ -90,8 +97,16 @@ class PostsController extends ApiGuardController
         }
       }
 
-      PostRepository::supercharge( $post, $this->apiKey->user_id );
+      $podOwner = PodUser::where( 'is_owner', 1 )
+        ->where( 'pod_id', $podId )
+        ->first();
 
+      if ($podOwner->user_id != $userId) {
+        dispatch(new MailPostCreated( $post, User::find($userId), $podOwner->user ));
+      }
+
+      PostRepository::supercharge( $post, $userId );
+      
       return response([
         "post" => $post,
       ], 200 );
@@ -176,22 +191,26 @@ class PostsController extends ApiGuardController
 
     if ( $post ) {
       try {
+        $userId = $this->apiKey->user_id;
+                
         $like = Like::create([
           'post_id' => $post->id,
-          'user_id' => $this->apiKey->user_id
+          'user_id' => $userId
         ]);
 
         // Send push notification...
-        if ( $post->user->id != $this->apiKey->user_id ) {
+        if ( $post->user->id != $userId ) {
           $notification = Notification::create([
             'type' => 0,
             'is_read' => 1,
             'post_id' => $post->id,
             'receiver_id' => $post->user_id,
-            'user_id' => $this->apiKey->user_id
+            'user_id' => $userId
           ]);
 
           dispatch( new LikePushNotification( $like ) );
+          
+          dispatch( new MailPostLiked( $post, User::find($userId), $post->user ));
         }
 
         LikeRepository::supercharge( $like );
@@ -244,24 +263,27 @@ class PostsController extends ApiGuardController
 
     if ( $post ) {
       try {
+        $userId = $this->apiKey->user_id;
         $commentData = $request->json()->get( 'comment' );
 
         $comment = Comment::create([
           'post_id' => $post->id,
-          'user_id' => $this->apiKey->user_id,
+          'user_id' => $userId,
           'body'    => $commentData['body']
         ]);
 
         // Send push notification...
-        if ( $post->user->id != $this->apiKey->user_id ) {
+        if ( $post->user->id != $userId ) {
           $notification = Notification::create([
             'type' => 1,
             'is_read' => 1,
             'post_id' => $post->id,
             'receiver_id' => $post->user_id,
-            'user_id' => $this->apiKey->user_id
+            'user_id' => $userId
           ]);
           dispatch( new CommentPushNotification( $comment ) );
+          
+          dispatch( new MailPostCommentCreated( $post, $comment, User::find($userId), $post->user ));
         }
 
         CommentRepository::supercharge( $comment );
@@ -335,10 +357,13 @@ class PostsController extends ApiGuardController
     $validation = Validator::make( $request->all(),
       [
         'post.type'    => 'required|in:link,image,text', // TODO: query the post_types table to populate this.
+        'post.pod_id'  => 'required|numeric', // TODO: query the post_types table to populate this.
       ],
       [
-        'post.type.required' => 'Post Type is required',
-        'post.type.in'       => 'Unrecognized Post Type'
+        'post.type.required'    => 'Post Type is required',
+        'post.type.in'          => 'Unrecognized Post Type',
+        'post.pod_id.required'  => 'Post Type is required',
+        'post.pod_id.numeric'   => 'Invalid pod id value',
       ]);
 
     if ( $validation->fails() ) {

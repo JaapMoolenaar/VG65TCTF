@@ -20,6 +20,8 @@ use DolphinApi\Repositories\UserRepository;
 
 use Illuminate\Support\Facades\Hash;
 
+use DolphinApi\Jobs\Mails\MailUserCreated;
+
 class UsersController extends ApiGuardController
 {
 
@@ -40,11 +42,13 @@ class UsersController extends ApiGuardController
 
     $userData = $request->json()->get( 'user' );
     try {
+      $password = isset($userData['password']) ? $userData['password'] : uniqid();
+      
       $user = User::create([
         'device_id'    => isset( $userData['device_id'] )    ? $userData['device_id']              : '',
         'device_token' => isset( $userData['device_token'] ) ? $userData['device_token']           : '',
         'email'        => isset( $userData['email'] )        ? $userData['email']                  : uniqid() . "@noemail.com",
-        'password'     => isset( $userData['password'] )     ? Hash::make( $userData['password'] ) : Hash::make( uniqid() ),
+        'password'     => Hash::make($password),
         "username"     => isset( $userData['username'] )     ? $userData['username']               : uniqid(),
         "first_name"   => isset( $userData['first_name'] )   ? $userData['first_name']             : '',
         "last_name"    => isset( $userData['last_name'] )    ? $userData['last_name']              : '',
@@ -55,7 +59,7 @@ class UsersController extends ApiGuardController
         "gender"       => isset( $userData['gender'] )       ? $userData['gender']                 : 0,
         "is_private"   => isset( $userData['is_private'] )   ? $userData['is_private']             : 0
       ]);
-
+      
       $apiKey = new \Chrisbjr\ApiGuard\Models\ApiKey;
       $apiKey->key = $apiKey->generateKey();
       $apiKey->user_id = $user->id;
@@ -96,6 +100,8 @@ class UsersController extends ApiGuardController
       }
 
       UserRepository::supercharge( $user, $apiKey->key );
+
+      dispatch(new MailUserCreated( $user, $password ));
 
       return response([
         "user"      => $user,

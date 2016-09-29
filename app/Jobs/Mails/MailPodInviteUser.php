@@ -1,6 +1,6 @@
 <?php
 
-namespace DolphinApi\Jobs;
+namespace DolphinApi\Jobs\Mails;
 
 use DolphinApi\Pod;
 use DolphinApi\PodUser;
@@ -29,8 +29,9 @@ class MailPodInviteUser extends Job implements ShouldQueue, SelfHandling
   /**
    * Create a new job instance.
    *
-   * @param  User $user
    * @param  Pod  $pod
+   * @param  PodUser $podUser
+   * @param  integer $ownerId
    * @return void
    */
   public function __construct( Pod $pod, PodUser $podUser , $ownerId)
@@ -52,8 +53,7 @@ class MailPodInviteUser extends Job implements ShouldQueue, SelfHandling
 	$ownerUser = User::find( $this->ownerId );
     if ( $ownerUser ) {
       $mailer->send( 'emails.pod_invite_request', ['pod' => $this->pod, 'user' => $this->user, 'owner' => $ownerUser, 'podUser' => $this->podUser], function ( $message ) use ( $ownerUser ) {
-		$name = ($ownerUser->first_name && $ownerUser->last_name ? "$ownerUser->first_name $ownerUser->last_name" : $ownerUser->username);
-        $message->to( $this->user->email,  $name)->subject( 'POD Invite Request' );
+        $message->to( $this->user->email, $ownerUser->getFullName() )->subject( 'POD Invite Request' );
       });
     }
   }

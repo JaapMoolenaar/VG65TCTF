@@ -29,7 +29,9 @@
         mso-table-lspace: 0pt;
         mso-table-rspace: 0pt;
         width: 100%; }
-        table td {
+        table td, 
+        table th {
+          text-align: left;
           font-family: sans-serif;
           font-size: 14px;
           vertical-align: top; }
@@ -128,6 +130,7 @@
       ------------------------------------- */
       .btn {
         box-sizing: border-box;
+        margin-top: 10px;
         width: 100%; }
         .btn > tbody > tr > td {
           padding-bottom: 15px; }
@@ -279,6 +282,7 @@
 
             <!-- START CENTERED WHITE CONTAINER -->
             <span class="preheader">@section('preheader') Dolphin notification @show</span>
+            @section('header') <img src="{{ $message->embed(public_path('img/dolphin-logo-email.png')) }}"> @show
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -288,27 +292,7 @@
                     <tr>
                       <td>
                         @section('content') @show
-                          
-                        <p>Hi there,</p>
-                        <p>Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.</p>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
-                          <tbody>
-                            <tr>
-                              <td align="left">
-                                <table border="0" cellpadding="0" cellspacing="0">
-                                  <tbody>
-                                    <tr>
-                                      <td> <a href="http://htmlemail.io" target="_blank">Call To Action</a> </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                        <p>This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.</p>
-                        <p>Good luck! Hope it works.</p>
-                        
+                        @section('signature')<p><br>Have a great day!<br>The Dolphin Team</p>@show
                       </td>
                     </tr>
                   </table>
@@ -323,7 +307,7 @@
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">&copy; <?php date('Y') ?> Dolphin</span>
+                    <span class="apple-link">&copy; {{ date('Y') }}, Dolphin</span>
                   </td>
                 </tr>
               </table>

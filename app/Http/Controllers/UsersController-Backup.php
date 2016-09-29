@@ -20,7 +20,7 @@ use DolphinApi\Repositories\UserRepository;
 
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends ApiGuardController
+class __UsersController extends ApiGuardController
 {
 
   protected $apiMethods = [

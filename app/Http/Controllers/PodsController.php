@@ -17,10 +17,15 @@ use DolphinApi\PodUser;
 use DolphinApi\Notification;
 
 use DolphinApi\Repositories\PodRepository;
-use DolphinApi\Jobs\MailPodJoinRequest;
-use DolphinApi\Jobs\MailPodInviteUser;
 use DolphinApi\Jobs\PodPushNotification;
 use DolphinApi\Jobs\PodMemberLeavePushNotification;
+
+use DolphinApi\Jobs\Mails\MailPodCreated;
+use DolphinApi\Jobs\Mails\MailPodJoinRequest;
+use DolphinApi\Jobs\Mails\MailPodJoinRequestApproval;
+use DolphinApi\Jobs\Mails\MailPodInviteUser;
+use DolphinApi\Jobs\Mails\MailPodInviteUserAcceptance;
+use DolphinApi\Jobs\Mails\MailPodUserRemoval;
 
 class PodsController extends ApiGuardController
 {
@@ -90,6 +95,8 @@ class PodsController extends ApiGuardController
           $pod->save();
         }
       }
+
+      dispatch(new MailPodCreated( $pod, $podUser->user ));
 
       PodRepository::supercharge( $pod, $this->apiKey->user_id );
 
@@ -280,12 +287,23 @@ class PodsController extends ApiGuardController
     if ( $pod ) {
       try {
         // check authenticated user is the owner (can approve)
-        if ( $pod->users()->where( 'is_owner', 1 )->where( 'user_id', $this->apiKey->user_id )->count() ) {
-          $podUser = PodUser::where( 'user_id', $userId )->where( 'pod_id', $pod->id )->first();
+        $podOwner = 
+          $pod->users()
+              ->where( 'is_owner', 1 )
+              ->where( 'user_id', $this->apiKey->user_id )
+              ->first();
+        
+        if ( $podOwner ) {
+          $podUser = 
+            PodUser::where( 'user_id', $userId )
+              ->where( 'pod_id', $pod->id )->first();
+          
           if ( $podUser ) {
             $podUser->is_approved = 1;
             $podUser->save();
 
+            dispatch( new MailPodJoinRequestApproval( $pod, $podUser->user, $podOwner->user ));
+            
             return response([
               "pod_user" => $podUser
             ], 200 );
@@ -333,6 +351,8 @@ class PodsController extends ApiGuardController
         $pod = Pod::find( $podId );
         dispatch( new PodPushNotification($pod, $podUser, 2, $this->apiKey->user_id));
 
+        dispatch( new MailPodUserRemoval( $pod, $podUser->user, $ownerPodUser->user ));
+
         PodUser::destroy( $podUser->id );
         return response( "", 204 );
       }
@@ -355,6 +375,7 @@ class PodsController extends ApiGuardController
     return response( "", 204 );
   }
 
+  // After asking to join, the pod owner can approve using this link
   public function userApprovalLink( $podId, $userId, $approvalToken = null)
   {
 	$status = true;
@@ -368,9 +389,12 @@ class PodsController extends ApiGuardController
 	}
     if ( $pod ){
       $podUser = PodUser::where( 'user_id', $userId )->where( 'pod_id', $pod->id )->first();
+      $podOwner = PodUser::where( 'is_owner', 1 )->where( 'pod_id', $pod->id )->first();
       if ( $podUser ) {
         $podUser->is_approved = 1;
         $podUser->save();
+        
+        dispatch( new MailPodJoinRequestApproval( $pod, $podUser->user, $podOwner->user ));
       }
     }
 	else{
@@ -445,33 +469,40 @@ class PodsController extends ApiGuardController
 	$pod = null;
 	if(empty($inviteToken)){
 		return View::make( 'pod_user_accept' , array(
-			'status' => false,
-			'error' => 'Invite token can not be null.'
+          'status' => false,
+          'error' => 'Invite token can not be null.'
 		));
 	}
 	
 	$pod = Pod::where( 'id', $podId )->first();
 	if(empty($pod)){
 		return View::make( 'pod_user_accept' , array(
-			'status' => false,
-			'error' => 'Pod not found!'
+          'status' => false,
+          'error' => 'Pod not found!'
 		));
 	}
 	
     if ( $pod ){
       $podUser = PodUser::where( 'user_id', $userId )
-	  ->where('invite_token', $inviteToken)
-	  ->where( 'pod_id', $pod->id )->first();
+        ->where('invite_token', $inviteToken)
+        ->where( 'pod_id', $pod->id )
+        ->first();
 	  
       if (empty($podUser )) {
         return View::make( 'pod_user_accept' , array(
-			'status' => false,
-			'error' => 'No request found!'
+          'status' => false,
+          'error' => 'No request found!'
 		));
       }
 	  
 	  $podUser->is_approved = 1;
-       $podUser->save();
+      $podUser->save();
+      
+      $podOwner = PodUser::where( 'is_owner', 1 )
+        ->where( 'pod_id', $pod->id )
+        ->first();
+      
+      dispatch( new MailPodInviteUserAcceptance( $pod, $podUser->user, $podOwner->user ));
     }
 
     return View::make( 'pod_user_accept' , array(

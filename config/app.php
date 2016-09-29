@@ -147,7 +147,9 @@ return [
 
         Chrisbjr\ApiGuard\Providers\ApiGuardServiceProvider::class,
         
-        'Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider'
+        Fedeisas\LaravelMailCssInliner\LaravelMailCssInlinerServiceProvider::class,
+        
+        Davibennun\LaravelPushNotification\LaravelPushNotificationServiceProvider::class
     ],
 
     /*

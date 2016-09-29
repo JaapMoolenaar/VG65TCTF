@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
           // Return a JSON response with the response array and status code
           return response()->json($response, $status);
         }
-
+        
         // Default to the parent class' implementation of handler
         return parent::render($request, $e);
       }

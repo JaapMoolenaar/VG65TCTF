@@ -1,6 +1,6 @@
 <?php
 
-namespace DolphinApi\Jobs;
+namespace DolphinApi\Jobs\Mails;
 
 use DolphinApi\Pod;
 use DolphinApi\PodUser;
@@ -27,8 +27,8 @@ class MailPodJoinRequest extends Job implements ShouldQueue, SelfHandling
   /**
    * Create a new job instance.
    *
-   * @param  User $user
    * @param  Pod  $pod
+   * @param  User $user
    * @return void
    */
   public function __construct( Pod $pod, User $user )
@@ -50,7 +50,7 @@ class MailPodJoinRequest extends Job implements ShouldQueue, SelfHandling
       $ownerUser = User::find( $ownerPodUser->user_id );
 
       $mailer->send( 'emails.pod_join_request', ['pod' => $this->pod, 'user' => $this->user, 'owner' => $ownerUser], function ( $message ) use ( $ownerUser ) {
-        $message->to( $ownerUser->email, "$ownerUser->first_name $ownerUser->last_name" )->subject( 'POD Join Request' );
+        $message->to( $ownerUser->email, $ownerUser->getFullName() )->subject( 'POD Join Request' );
       });
     }
   }

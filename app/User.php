@@ -80,5 +80,23 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
       return $this->hasMany( 'DolphinApi\Comment' );
     }
+        
+    public function getFullName()
+    {
+      return (
+        $this->first_name && $this->last_name ? 
+          $this->first_name.' '.$this->last_name : 
+          $this->username
+      );
+    }
+    
+    public function getFirstName()
+    {
+      return (
+        $this->first_name ? 
+          $this->first_name : 
+          $this->username
+      );
+    }
 }
 
