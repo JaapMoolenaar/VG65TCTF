@@ -10,12 +10,12 @@
 ```
 Register User -> DolphinApi\Jobs\Mails\MailUserCreated
 New Post -> DolphinApi\Jobs\Mails\MailPostCreated
-Report Post
+Report Post ** To be completed
 New Like -> DolphinApi\Jobs\Mails\MailPostLiked
 New Comment -> DolphinApi\Jobs\Mails\MailPostCommentCreated
-New Topic
-New Subject
-New Grade
+New Topic ** To be completed
+New Subject ** To be completed
+New Grade ** To be completed
 New POD -> DolphinApi\Jobs\Mails\MailPodInviteUser
 Update POD -> DolphinApi\Jobs\Mails\MailPodInviteUser
 Accept POD Invite -> DolphinApi\Jobs\Mails\MailPodInviteUserAcceptance
