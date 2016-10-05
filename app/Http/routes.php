@@ -38,6 +38,7 @@ Route::group(
 
     // Posts
     Route::post(   'posts',               'PostsController@create' );
+    Route::patch(  'posts',               'PostsController@update' );
     Route::post(   'posts/filter',        'PostsController@filter' );
     Route::get(    'posts/{id}',          'PostsController@get' );
     Route::get(    'posts/{id}/likes',    'PostsController@getLikes' );
@@ -46,6 +47,9 @@ Route::group(
     Route::delete( 'posts/{id}/likes',    'PostsController@deleteLike' );
     Route::post(   'posts/{id}/comments', 'PostsController@postComment' );
     Route::delete( 'posts/{id}',          'PostsController@remove' );
+//    Route::post(   'posts/{id}/comments/{commentId}', 'PostsController@updateComment' );
+    Route::post(   'posts/{id}/comments/{commentId}/likes', 'PostsController@postCommentLike' );
+    Route::delete( 'posts/{id}/comments/{commentId}/likes', 'PostsController@deleteCommentLike' );
 
     // Post Abuse Reports
     Route::post( 'posts/{id}/reports', 'PostsController@postReport' );

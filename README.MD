@@ -10,7 +10,7 @@
 ```
 Register User -> DolphinApi\Jobs\Mails\MailUserCreated
 New Post -> DolphinApi\Jobs\Mails\MailPostCreated
-Report Post ** To be completed
+Report Post ** Will be ingonred for now)
 New Like -> DolphinApi\Jobs\Mails\MailPostLiked
 New Comment -> DolphinApi\Jobs\Mails\MailPostCommentCreated
 New Topic ** To be completed
@@ -31,9 +31,9 @@ New Post -> pod owner (when pod owner !== new post owner)
 Report Post -> admin
 New Like -> user
 New Comment -> user
-New Topic -> admin
-New Subject -> admin
-New Grade -> admin
+New Topic -> user
+New Subject -> user
+New Grade -> user
 New POD -> pod owner
 Update POD  -> users(invites)
 Accept POD Invite -> pod owner

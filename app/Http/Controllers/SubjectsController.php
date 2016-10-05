@@ -10,7 +10,10 @@ use Validator;
 use DolphinApi\Http\Requests;
 use DolphinApi\Http\Controllers\Controller;
 
+use DolphinApi\User;
 use DolphinApi\Subject;
+
+use DolphinApi\Jobs\Mails\MailSubjectCreated;
 
 class SubjectsController extends ApiGuardController
 {
@@ -38,6 +41,8 @@ class SubjectsController extends ApiGuardController
       $subject = Subject::create([
         'name' => trim( strtolower( $subjectData['name'] ) )
       ]);
+      
+      dispatch(new MailSubjectCreated( $subject, User::find($this->apiKey->user_id) ));
 
       return [
         'subject' => $subject

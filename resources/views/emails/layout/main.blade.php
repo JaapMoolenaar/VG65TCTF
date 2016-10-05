@@ -281,7 +281,8 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">@section('preheader') Dolphin notification @show</span>
+            {{-- preheader allows to add a text that is shown first in lock screen notifications and gemail previews and such --}}
+            <span class="preheader">@section('preheader') @show</span>
             @section('header') <img src="{{ $message->embed(public_path('img/dolphin-logo-email.png')) }}"> @show
             <table class="main">
 

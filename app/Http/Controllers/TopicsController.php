@@ -12,7 +12,10 @@ use DolphinApi\Http\Controllers\Controller;
 
 use DolphinApi\Repositories\TopicRepository;
 
+use DolphinApi\User;
 use DolphinApi\Topic;
+
+use DolphinApi\Jobs\Mails\MailTopicCreated;
 
 class TopicsController extends ApiGuardController
 {
@@ -29,6 +32,8 @@ class TopicsController extends ApiGuardController
       $topic = Topic::create([
         'name' => trim( strtolower( $topicData['name'] ) )
       ]);
+      
+      dispatch(new MailTopicCreated( $topic, User::find($this->apiKey->user_id) ));
 
       return [
         'topic' => $topic

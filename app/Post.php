@@ -31,12 +31,12 @@ class Post extends Model
 
   function link()
   {
-    return $this->hasOne( 'DolphinApi\Link' );
+    return $this->hasOne( 'DolphinApi\Link' )->whereNull('comment_id');
   }
 
   function image()
   {
-    return $this->hasOne( 'DolphinApi\Image' );
+    return $this->hasOne( 'DolphinApi\Image' )->whereNull('comment_id');
   }
 
   function user()
@@ -51,7 +51,7 @@ class Post extends Model
 
   function likes()
   {
-    return $this->hasMany( 'DolphinApi\Like' );
+    return $this->hasMany( 'DolphinApi\Like' )->whereNull('comment_id');
   }
 
   function reports()

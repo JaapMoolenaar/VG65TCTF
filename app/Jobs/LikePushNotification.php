@@ -45,12 +45,23 @@ class LikePushNotification extends Job implements ShouldQueue, SelfHandling
     $likeUser = User::find( $this->like->user_id );
     $post = Post::find( $this->like->post_id );
     $postOwnerUser  = $post->user;
-    $message = PushNotification::Message( $likeUser->username . ' liked on your post: ' . $post->title, [
-      'custom' => [
-        'post_id' => $post->id
-      ]
-    ]);
-    
+
+    if (!$this->like->comment_id) {
+      $message = PushNotification::Message( $likeUser->username . ' liked on your post: ' . $post->title, [
+        'custom' => [
+          'post_id' => $post->id
+        ]
+      ]);
+    }
+    else {
+      $message = PushNotification::Message( $likeUser->username . ' liked on your comment on: ' . $post->title, [
+        'custom' => [
+          'post_id' => $post->id,
+          'comment_id' => $this->like->comment_id
+        ]
+      ]);
+    }
+
 //    $token = 'a178fc29a43a40fea102f10d9807c3dc45b46d5c43358e3aa6ea21ea6dd462bb';
     $token = $postOwnerUser->device_token; // TODO: test, remove on production!!!!
 

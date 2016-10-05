@@ -262,7 +262,7 @@ class UsersController extends ApiGuardController
     $user = User::find( $id );
 
     if ( $user ) {
-      $comments = CommentRepository::byUserId( $user->id );
+      $comments = CommentRepository::byUserId( $user->id, $this->apiKey->user_id );
 
       return response([
         'comments' => $comments

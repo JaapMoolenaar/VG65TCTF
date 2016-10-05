@@ -10,7 +10,10 @@ use Validator;
 use DolphinApi\Http\Requests;
 use DolphinApi\Http\Controllers\Controller;
 
+use DolphinApi\User;
 use DolphinApi\Grade;
+
+use DolphinApi\Jobs\Mails\MailGradeCreated;
 
 class GradesController extends ApiGuardController
 {
@@ -38,6 +41,8 @@ class GradesController extends ApiGuardController
       $grade = Grade::create([
         'name' => trim( strtolower( $gradeData['name'] ) )
       ]);
+      
+      dispatch(new MailGradeCreated( $grade, User::find($this->apiKey->user_id) ));
 
       return [
         'grade' => $grade

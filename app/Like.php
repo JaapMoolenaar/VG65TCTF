@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Like extends Model
 {
-  protected $visible = ['user', 'post', 'id', 'created_at'];
+  protected $visible = ['user', 'post', 'comment', 'id', 'created_at'];
 
-  protected $fillable = ['post_id', 'user_id'];
+  protected $fillable = ['post_id', 'comment_id', 'user_id'];
 
   public function getCreatedAtAttribute( $value )
   {
@@ -23,5 +23,10 @@ class Like extends Model
   public function post()
   {
     return $this->belongsTo( 'DolphinApi\Post' );
+  }
+  
+  public function comment()
+  {
+    return $this->belongsTo( 'DolphinApi\Comment', 'comment_id' );
   }
 }
